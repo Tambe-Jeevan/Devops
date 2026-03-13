@@ -47,3 +47,17 @@ Follow these steps in your terminal to build muscle memory:
    mkdir linux_day2
    cd linux_day2
    touch devops.txt cloud.txt aws.txt
+
+
+2. **Manipulate**
+# Create files and navigate
+touch file1.txt file2.txt file3.txt
+ls        # List files
+ls -a     # Show hidden files
+cd ..     # Go back
+cd devops_practice
+
+3. **Writing & Reading:**
+# Basic path check
+pwd       # Confirm current directory
+clear     # Clean the screen
