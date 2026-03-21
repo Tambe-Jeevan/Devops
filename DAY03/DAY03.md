@@ -1,171 +1,122 @@
-Great work keeping the momentum, Jeevan! Day 3 is a huge milestone because **Permissions** are the core of Cloud security.
+Great decision, Jeevan 👍. We will continue your 2 hours daily consistent study to become a Cloud / DevOps Engineer.
 
-I have updated your master `README.md` to include Day 3. I followed your specific structure for the practice labs to keep it consistent.
+We will follow our daily micro-learning system:
+Every day (2 hours):
 
----
+* 30 min → Concept
+* 60 min → Hands-on practice
+* 30 min → Small task / revision
 
-```markdown
-# 🚀 6-Month Cloud & DevOps Engineer Challenge
-**Student:** Jeevan  
-**Goal:** Master Cloud & DevOps through consistent 2-hour daily micro-learning.
+Today we move forward with Day 3.
 
----
+### Day 3 – User Management & Permissions (DevOps Foundation)
 
-## 📅 The Daily System (2 Hours)
-* **30 min:** Concept Learning
-* **60 min:** Hands-on Practice
-* **30 min:** Small Task / Revision
+1️⃣ **Concept (30 min)**
+In your Technical Support role, you use Active Directory to create users, reset passwords, and give folder access. In the DevOps and Cloud world, you must do the exact same thing on Linux servers using the command line.
 
----
+Security is the most important part of DevOps. If a web server gets hacked, it is usually because file permissions were left wide open.
 
-## 🟢 Day 1: Introduction to Linux (Foundation)
+Linux uses a simple number system for permissions:
+* **Read (r)** = 4
+* **Write (w)** = 2
+* **Execute (x)** = 1
 
-### 📖 Concept
-Most DevOps servers run on Linux. It is the engine behind Git, Docker, and Kubernetes.
-* **Why?** Open source, lightweight, secure, and easy to automate via CLI.
 
-### 🛠️ Hands-on Practice
 
-**1. Setup:**
-```bash
-mkdir devops_practice
-cd devops_practice
+When you combine these numbers, you get specific permissions. For example:
+* 4 + 2 + 1 = **7** (Full control: Read, Write, and Execute)
+* 4 + 2 = **6** (Read and Write only)
+* 4 = **4** (Read only)
 
-```
+Every file has 3 types of owners:
+1. **User** (The person who created it)
+2. **Group** (A specific team, like 'developers')
+3. **Others** (Everyone else in the world)
 
-**2. Manipulate:**
+2️⃣ **Setup Environment (IMPORTANT)**
+Make sure your environment is ready:
+* Open your Ubuntu VirtualBox OR your Windows WSL terminal.
+* Type `cd ~` to ensure you are in your home folder.
 
-```bash
-touch file1.txt file2.txt file3.txt
-ls -a     # Show all files
-cd ..     # Go back
-cd devops_practice
+3️⃣ **Basic Security Commands (Practice – 1 hour)**
+Open the terminal and practice these commands. (Note: `sudo` stands for "SuperUser DO" – it gives you administrator rights, just like "Run as Administrator" in Windows).
 
-```
+See who you are logged in as:
+`whoami`
 
-**3. Writing & Reading:**
+See file permissions (Look at the letters on the far left, like `-rw-r--r--`):
+`ls -l`
 
-```bash
-pwd       # Confirm current directory
-clear     # Clean the screen
+Create a new user:
+`sudo useradd devops_user`
 
-```
+Set a password for the new user:
+`sudo passwd devops_user`
 
----
+Change file permissions (`chmod`):
+Give everyone full access (Very dangerous, but good to know):
+`chmod 777 secret_file.txt`
 
-## 🔵 Day 2: Linux File Management
+Give the owner read/write, but everyone else read-only (Standard, safe setting):
+`chmod 644 secret_file.txt`
 
-### 📖 Concept
+Change the owner of a file (`chown`):
+`sudo chown devops_user secret_file.txt`
 
-DevOps engineers manage logs and configuration files. You must be able to move, copy, and delete data safely.
+Switch to another user account:
+`su - devops_user`
+*(Type `exit` to switch back)*
 
-### 🛠️ Hands-on Practice
+4️⃣ **Small Practice Task (30 min)**
+Do this step by step:
 
-**1. Setup:**
+1️⃣ Create a new folder for today
+`mkdir day3_security`
 
-```bash
-mkdir linux_day2
-cd linux_day2
-touch devops.txt cloud.txt aws.txt
+2️⃣ Go inside the folder
+`cd day3_security`
 
-```
+3️⃣ Create a file
+`echo "Password=12345" > passwords.txt`
 
-**2. Manipulate:**
+4️⃣ Check the default permissions
+`ls -l`
 
-```bash
-cp devops.txt devops_copy.txt    # Backup
-mv cloud.txt cloud_notes.txt     # Rename/Move
-rm aws.txt                       # Delete file
+5️⃣ Change the permissions so ONLY the owner can read or write it (Nobody else can see it)
+`chmod 600 passwords.txt`
 
-```
+6️⃣ Check the permissions again to see the change
+`ls -l`
 
-**3. Writing & Reading:**
+5️⃣ **What You Learned Today**
+You learned:
+✔ How Linux compares to Active Directory for user management.
+✔ Creating users and setting passwords (`useradd`, `passwd`).
+✔ Understanding the `rwx` (4-2-1) permission model.
+✔ Changing permissions (`chmod`) to secure files.
+✔ Changing file ownership (`chown`).
 
-```bash
-echo "Learning DevOps with Jeevan" > devops.txt
-cat devops.txt
-tail -f devops.txt                # Follow live logs
+6️⃣ **Homework (Important)**
+Practice the `chmod` command specifically. This is a very common DevOps interview question!
 
-```
+Try this real-world scenario:
+* Create a file named `run_website.sh`
+* Use `chmod` to give the User (owner) full permissions (7), the Group read/execute (5), and Others no access at all (0).
+* *Hint: The command will be `chmod 750 run_website.sh`*
 
----
+Commands you must remember today:
+`ls -l`
+`chmod`
+`chown`
+`sudo`
 
-## 🟡 Day 3: Linux File Permissions (Security)
+Tomorrow – Day 4
+You will learn:
+✔ Networking basics for DevOps
+✔ Checking IP Addresses
+✔ Testing connections (`ping`)
+✔ Downloading files directly from the internet via terminal (`wget`, `curl`)
 
-### 📖 Concept
-
-Linux uses a security model based on **Read (r)**, **Write (w)**, and **Execute (x)**. These are assigned to the **Owner**, **Group**, and **Others**.
-
-* **Permissions numbers:** 7 (rwx), 6 (rw-), 5 (r-x), 4 (r--).
-* **DevOps Use Case:** Ensuring scripts can run (`+x`) while keeping configuration files secure.
-
-### 🛠️ Hands-on Practice
-
-**1. Setup:**
-
-```bash
-mkdir linux_day3
-cd linux_day3
-touch file1.txt file2.txt script.sh deploy.sh
-
-```
-
-**2. Manipulate:**
-
-```bash
-# Check current permissions
-ls -l
-
-# Change permissions using numbers
-chmod 777 file1.txt    # Full access for everyone (dangerous!)
-chmod 644 file2.txt    # Owner can read/write, others can only read
-
-# Change permissions for scripts
-chmod +x script.sh     # Make it executable
-chmod +x deploy.sh     # Make deploy script executable
-
-# Change ownership (requires sudo)
-# sudo chown ubuntu file1.txt
-
-```
-
-**3. Writing & Reading:**
-
-```bash
-# Add content to the executable script
-echo "echo 'Deploy script running'" > deploy.sh
-
-# Run the script
-./deploy.sh
-
-```
-
----
-
-## ✅ Progress Summary
-
-* [x] Day 1: Navigation & Basic CLI
-* [x] Day 2: File Operations & Log Reading
-* [x] Day 3: Permissions & Security (`chmod`, `chown`)
-* [ ] Day 4: Users & Groups (Coming Soon)
-
----
-
-## 💡 Key Commands to Remember
-
-`pwd` • `ls -l` • `cd` • `mkdir` • `touch` • `cp` • `mv` • `rm` • `cat` • `chmod` • `chown`
-
-*Ready for Day 4? Just come back tomorrow and type:*
-
-> **"Day 4 DevOps study"** 🚀
-
-```
-
----
-
-### What's Next?
-When you copy this into VS Code, you can see your progress growing! 
-
-Would you like me to help you **Commit** and **Push** these changes to your GitHub repository so your progress is saved online?
-
-```
+Just come tomorrow and type:
+**“Day 4 DevOps study”**
+and I will continue your Cloud / DevOps Engineer training step by step 🚀
